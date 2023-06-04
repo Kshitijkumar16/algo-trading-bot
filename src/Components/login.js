@@ -43,7 +43,7 @@ function LoginPage() {
           <small>{passwordError}</small>
         </div>
         <button type="submit">
-          <a href="/deshboard" className="login-link">
+          <a href="/strategies" className="login-link">
             Login
           </a>
         </button>
