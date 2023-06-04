@@ -4,12 +4,11 @@ import Nav from "./dashboardNavbar";
 const Navbar = () => {
 
   return (
-    <div>
-      < Nav />
+    <><Nav /><div>
       <div className="page-heading">
         <div className="perform-heading">Performance</div>
       </div>
-    </div>
+    </div></>
   );
 };
 

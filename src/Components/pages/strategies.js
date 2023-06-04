@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Nav from "./dashboardNavbar";
+import Performance from "./performance"
+import { Link } from "react-scroll";
 
 const Navbar = () => {
   const [rows, setRows] = useState([
@@ -51,8 +53,8 @@ const Navbar = () => {
   const [editingIndex, setEditingIndex] = useState(null);
 
   return (
-    <div className="strat-body">
-      < Nav />
+    <><div className="strat-body">
+      <Nav />
 
       <div className="page-heading">
         <div className="strat-heading">Strategies</div>
@@ -72,97 +74,82 @@ const Navbar = () => {
           </thead>
 
           <tbody>
-          
-      {rows.map((row, index) => (
-  <tr key={index}>
-    <td>
-      {editingIndex === index ? (
-        <input
-          value={row.stock}
-          onChange={(event) =>
-            setRows((prevRows) =>
-              prevRows.map((r, i) =>
-                i === index ? { ...r, stock: event.target.value } : r
-              )
-            )
-          }
-        />
-      ) : (
-        row.stock
-      )}
-    </td>
-    <td>
-      {editingIndex === index ? (
-        <input
-          value={row.strategy}
-          onChange={(event) =>
-            setRows((prevRows) =>
-              prevRows.map((r, i) =>
-                i === index ? { ...r, strategy: event.target.value } : r
-              )
-            )
-          }
-        />
-      ) : (
-        row.strategy
-      )}
-    </td>
-    <td>
-      {editingIndex === index ? (
-        <input
-          value={row.parameters}
-          onChange={(event) =>
-            setRows((prevRows) =>
-              prevRows.map((r, i) =>
-                i === index ? { ...r, parameters: event.target.value } : r
-              )
-            )
-          }
-        />
-      ) : (
-        row.parameters
-      )}
-    </td>
-    <td>
-      <button
-        className="table-button"
-        onClick={() => toggleRunAutomation(index)}
-      >
-        {row.isRunning ? "On" : "Off"}
-      </button>
-    </td>
-    <td>
-      <button className="table-button" onClick={() => deleteRow(index)}>
-        Delete
-      </button>
-    </td>
-    <td>
-      {editingIndex === index ? (
-        <>
-          <button
-            className="table-button"
-            onClick={() => setEditingIndex(null)}
-          >
-            Cancel
-          </button>
-          <button
-            className="table-button"
-            onClick={() => setEditingIndex(null)}
-          >
-            Save
-          </button>
-        </>
-      ) : (
-        <button
-          className="table-button"
-          onClick={() => setEditingIndex(index)}
-        >
-          Edit
-        </button>
-      )}
-    </td>
-  </tr>
-))}
+
+            {rows.map((row, index) => (
+              <tr key={index}>
+                <td>
+                  {editingIndex === index ? (
+                    <input
+                      value={row.stock}
+                      onChange={(event) => setRows((prevRows) => prevRows.map((r, i) => i === index ? { ...r, stock: event.target.value } : r
+                      )
+                      )} />
+                  ) : (
+                    row.stock
+                  )}
+                </td>
+                <td>
+                  {editingIndex === index ? (
+                    <input
+                      value={row.strategy}
+                      onChange={(event) => setRows((prevRows) => prevRows.map((r, i) => i === index ? { ...r, strategy: event.target.value } : r
+                      )
+                      )} />
+                  ) : (
+                    row.strategy
+                  )}
+                </td>
+                <td>
+                  {editingIndex === index ? (
+                    <input
+                      value={row.parameters}
+                      onChange={(event) => setRows((prevRows) => prevRows.map((r, i) => i === index ? { ...r, parameters: event.target.value } : r
+                      )
+                      )} />
+                  ) : (
+                    row.parameters
+                  )}
+                </td>
+                <td>
+                  <button
+                    className="table-button"
+                    onClick={() => toggleRunAutomation(index)}
+                  >
+                    {row.isRunning ? "On" : "Off"}
+                  </button>
+                </td>
+                <td>
+                  <button className="table-button" onClick={() => deleteRow(index)}>
+                    Delete
+                  </button>
+                </td>
+                <td>
+                  {editingIndex === index ? (
+                    <>
+                      <button
+                        className="table-button"
+                        onClick={() => setEditingIndex(null)}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className="table-button"
+                        onClick={() => setEditingIndex(null)}
+                      >
+                        Save
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      className="table-button"
+                      onClick={() => setEditingIndex(index)}
+                    >
+                      Edit
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
 
 
 
@@ -179,7 +166,9 @@ const Navbar = () => {
       <div className="blank">
         <span> | </span>
       </div>
-    </div>
+    </div><div>
+        <Performance />
+      </div></>
   );
 };
 

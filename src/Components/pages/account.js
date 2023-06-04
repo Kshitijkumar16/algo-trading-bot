@@ -11,6 +11,9 @@ const Navbar = () => {
       <div className="page-heading">
         <div className="perform-heading">Account</div>
       </div>
+      <div className="account-container">
+        hello
+      </div>
     </div>
   );
 };

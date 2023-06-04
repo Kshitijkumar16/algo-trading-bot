@@ -860,3 +860,10 @@ table tr:hover {
   text-align: center;
   text-decoration: underline;
 }
+.account-container {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: white;
+}
