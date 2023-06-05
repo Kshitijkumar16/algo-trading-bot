@@ -1,22 +1,58 @@
-import React from "react";
-import { auth } from './firebase'
+import React, { useState } from "react";
+import { firbase } from "./firebase";
+import { addDoc, collection } from "@firebase/firestore"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 function LoginPage() {
-  const handleGoogle = async (e) => {
-    const provider = await new GoogleAuthProvider();
-    return signInWithPopup(auth, provider)
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setUsernameError("");
+    setPasswordError("");
   };
 
   return (
     <div className="login-container">
-      <form id="form" className="login-form">
+      <form id="form" className="login-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
-        <button onSubmit={handleGoogle} className="login-link">
-          Login via Google
+        <div className="login-form-control">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Enter username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <small>{usernameError}</small>
+        </div>
+        <div className="login-form-control">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <small>{passwordError}</small>
+        </div>
+        <button type="submit">
+          <a href="/deshboard" className="login-link">
+            Login
+          </a>
         </button>
       </form>
+      <div className="login-options">
+        <a href="/signup">Sign up</a>
+        <span> | </span>
+        <a href="/forgotpass">Forgot password?</a>
+      </div>
     </div>
   );
 }
