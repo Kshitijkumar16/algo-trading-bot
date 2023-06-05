@@ -1,58 +1,22 @@
-import React, { useState } from "react";
-import { firbase } from "./firebase";
-import { addDoc, collection } from "@firebase/firestore"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import React from "react";
+import { auth } from './firebase'
 
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [usernameError, setUsernameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setUsernameError("");
-    setPasswordError("");
+  const handleGoogle = async (e) => {
+    const provider = await new GoogleAuthProvider();
+    return signInWithPopup(auth, provider)
   };
 
   return (
     <div className="login-container">
-      <form id="form" className="login-form" onSubmit={handleSubmit}>
+      <form id="form" className="login-form">
         <h2>Login</h2>
-        <div className="login-form-control">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            placeholder="Enter username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <small>{usernameError}</small>
-        </div>
-        <div className="login-form-control">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <small>{passwordError}</small>
-        </div>
-        <button type="submit">
-          <a href="/strategies" className="login-link">
-            Login
-          </a>
+        <button onSubmit={handleGoogle} className="login-link">
+          Login via Google
         </button>
       </form>
-      <div className="login-options">
-        <a href="/signup">Sign up</a>
-        <span> | </span>
-        <a href="/forgotpass">Forgot password?</a>
-      </div>
     </div>
   );
 }

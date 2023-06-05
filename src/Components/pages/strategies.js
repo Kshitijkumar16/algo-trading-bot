@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Nav from "./dashboardNavbar";
 import Performance from "./performance"
-import { Link } from "react-scroll";
 
 const Navbar = () => {
   const [rows, setRows] = useState([
